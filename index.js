@@ -109,7 +109,8 @@ module.exports = {
             this.log('Replacing files.', {verbose: true});
             return Promise.all(response.map(this._deleteFile, this))
               .then(this._doUpload.bind(this))
-              .then(this._logFiles.bind(this, response));
+              .then(this._logFiles.bind(this, response))
+              .catch(function(e) { this.log(e) }.bind(this));
           } else {
             this.log('Leaving files alone.', {verbose: true});
             return this._logFiles(response);
